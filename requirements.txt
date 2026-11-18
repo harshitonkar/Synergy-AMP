@@ -1,0 +1,8 @@
+# Data scripts (scripts/01_download_dbaasp.py, scripts/02_clean_dataset.py)
+pandas
+numpy
+requests
+pubchempy
+
+# Modelling notebook: dependencies are installed by its first cell in Google Colab
+# (transformers, torch, rdkit, xgboost, biopython, scikit-learn, scipy, shap)
