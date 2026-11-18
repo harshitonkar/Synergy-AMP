@@ -153,6 +153,8 @@ README.md    requirements.txt    .gitignore
 ## 10. Author and license
 
 Author: Harshit Narayan Onkar
+
+
 Code License: MIT License
 
 Copyright (c) 2026 Harshit Narayan Onkar 
