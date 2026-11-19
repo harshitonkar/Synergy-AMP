@@ -16,9 +16,9 @@ TEST1 = pd.DataFrame([
     ["Bacterium only", 0.506, 0.507, 0.002],
     ["Baseline (antibiotic + bacterium)", 0.643, 0.593, 0.207],
     ["Baseline + charge, hydrophobic moment, length", 0.613, 0.572, 0.167],
-    ["Baseline + ESM reduced to 10", 0.597, 0.549, 0.135],
+    ["Baseline + ESM reduced to 10", 0.592, 0.548, 0.125],
     ["Baseline + all 7 simple peptide features", 0.590, 0.562, 0.110],
-    ["Full", 0.585, 0.533, 0.126],
+    ["Full", 0.586, 0.533, 0.127],
 ], columns=["Model", "AUROC", "AUPRC", "MCC"])
 
 TEST2 = pd.DataFrame([
@@ -29,8 +29,8 @@ TEST2 = pd.DataFrame([
 
 TEST3 = pd.DataFrame([
     ["Baseline (antibiotic + bacterium)", 0.669, 0.645, 0.247],
-    ["Full", 0.651, 0.634, 0.239],
-    ["Peptide-only", 0.612, 0.587, 0.161],
+    ["Full", 0.652, 0.635, 0.236],
+    ["Peptide-only", 0.613, 0.588, 0.171],
 ], columns=["Model", "AUROC", "AUPRC", "MCC"])
 
 
@@ -180,10 +180,10 @@ with tabs[1]:
     st.markdown("### Main interpretation")
     st.write(
         "On unseen peptide families, the antibiotic + bacterium baseline (AUROC 0.643 ± 0.005) "
-        "outperformed the full model (0.585 ± 0.011). In the unseen-antibiotic test, peptide-only "
+        "outperformed the full model (0.586 ± 0.010). In the unseen-antibiotic test, peptide-only "
         "slightly exceeded the full model, suggesting the apparent transfer result may reflect "
         "peptide or study-level patterns rather than robust peptide–antibiotic interaction learning. "
-        "On unseen papers, the full model also did not outperform the baseline."
+        "The study-held-out numbers are exploratory: the current curation step can collapse records from multiple references, so they are not definitive evidence of unseen-study generalization."
     )
 
 with tabs[2]:
