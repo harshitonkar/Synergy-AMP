@@ -3,6 +3,8 @@ pandas
 numpy
 requests
 pubchempy
+streamlit
+xgboost
 
 # Modelling notebook: dependencies are installed by its first cell in Google Colab
 # (transformers, torch, rdkit, xgboost, biopython, scikit-learn, scipy, shap)
