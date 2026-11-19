@@ -21,8 +21,9 @@ from Bio.SeqUtils.ProtParam import ProteinAnalysis
 from rdkit import Chem
 from rdkit.Chem import Descriptors, rdFingerprintGenerator
 
-MODEL_DIR = Path("models")
-MODEL_DIR.mkdir(exist_ok=True)
+ROOT = Path(__file__).resolve().parent
+MODEL_DIR = ROOT / "models"
+MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
 EISEN = dict(A=.25, R=-1.76, N=-.64, D=-.72, C=.04, Q=-.69, E=-.62, G=.16,
              H=-.40, I=.73, L=.53, K=-1.10, M=.26, F=.61, P=-.07, S=-.26,
@@ -143,6 +144,6 @@ def main(data_path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data", default="synergy_clean.csv")
+    parser.add_argument("--data", type=Path, default=ROOT / "synergy_clean.csv")
     args = parser.parse_args()
-    main(args.data)
+    main(args.data if args.data.is_absolute() else ROOT / args.data)
