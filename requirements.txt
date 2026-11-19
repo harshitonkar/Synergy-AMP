@@ -1,10 +1,13 @@
-# Data scripts (scripts/01_download_dbaasp.py, scripts/02_clean_dataset.py)
+# Existing project dependencies (preserved)
 pandas
 numpy
 requests
 pubchempy
-streamlit
-xgboost
 
-# Modelling notebook: dependencies are installed by its first cell in Google Colab
-# (transformers, torch, rdkit, xgboost, biopython, scikit-learn, scipy, shap)
+# Streamlit application and model inference
+streamlit>=1.40,<2
+xgboost>=2.0,<4
+torch>=2.2,<3
+transformers>=4.40,<5
+biopython>=1.83,<2
+rdkit>=2024.3

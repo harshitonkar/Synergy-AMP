@@ -1,0 +1,8 @@
+# Install in Google Colab or a local Python 3.11 environment to train artifacts
+pandas
+numpy
+xgboost>=2.0,<4
+torch>=2.2,<3
+transformers>=4.40,<5
+biopython>=1.83,<2
+rdkit>=2024.3
