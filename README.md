@@ -80,9 +80,9 @@ Every variant that adds peptide features scores below the baseline, by more than
 The full model scores well here, but a model that sees only the peptide scores as well. The same peptides occur with other antibiotics in the training data,
 so the score reflects peptide memorization (some peptides synergize frequently), not generalization to new antibiotics.
 
-### 4.3 Unseen study (leave-one-study-out, single run)
+### 4.3 Study-held-out analysis (exploratory; preprocessing caveat)
 
-96 % of peptides occur in only one study, so this split is close to a test on unseen peptides from unseen laboratories.
+The notebook groups rows by the `reference` field for this split. However, the current curation script merges records by peptide, antibiotic, and species and keeps only the first reference. Therefore, a combination reported in multiple studies can lose its multi-study provenance before this split. Treat these numbers as exploratory, **not as a definitive unseen-study evaluation**. The curation pipeline must preserve study-level provenance and the benchmark must be rerun before making claims about cross-study generalization.
 
 | Model | AUROC | AUPRC | MCC |
 |---|---|---|---|
@@ -115,7 +115,7 @@ Consequently, a genetic-algorithm peptide designer was not pursued: it would opt
 4. Between-study effects inflate the baseline (about 0.64 overall versus about 0.59 within each study group).
 5. Polymyxin B is represented by the colistin structure (121 rows).
 6. Peptide representations are limited: an 8M-parameter ESM-2 model, terminal modifications (such as amidation) ignored, non-standard residues removed.
-7. The leave-one-out evaluations are single runs without seed variation; rows without a reference form one group in leave-one-study-out.
+7. Leave-one-antibiotic-out is a single run. The study-held-out analysis is exploratory because the current cleaning step can collapse records from multiple references into one row; rows without a reference also form one group.
 8. No experimental validation.
 
 ## 7. Reproducing the analysis
@@ -130,15 +130,28 @@ python scripts/02_clean_dataset.py         # synergy_clean.csv and antibiotic_sm
 ```
 
 Later DBAASP releases may change record counts slightly; small numeric differences are expected (two runs of the same code on different library builds differed by at most 0.01 in any reported metric).
-The reported run used Python 3.13.16, numpy 2.4.6, pandas 2.2.3, scikit-learn 1.6.1, scipy 1.16.3, xgboost 3.4.1, rdkit 2026.09.2, biopython 1.88, shap 0.54.1, torch 2.14.1 and transformers 5.22.1 (recorded in the notebook's last section).
+The reported benchmark run recorded Python 3.13.16, numpy 2.4.6, pandas 2.2.3, scikit-learn 1.6.1, scipy 1.16.3, xgboost 3.4.1, rdkit 2026.09.2, biopython 1.88, shap 0.54.1, torch 2.14.1 and transformers 5.22.1 (recorded in the notebook's last section).
 
 ## 8. Repository layout
 
+```text
+scripts/
+  01_download_dbaasp.py
+  02_clean_dataset.py
+notebooks/
+  synergy_amp_benchmark.ipynb
+models/
+  README.md
+app.py
+train_models.py
+requirements.txt
+requirements-training.txt
+README.md
+LICENSE
+.gitignore
 ```
-scripts/     01_download_dbaasp.py   02_clean_dataset.py
-notebooks/   synergy_amp_benchmark.ipynb
-README.md    requirements.txt    .gitignore
-```
+
+The Streamlit app's interactive tester remains inactive until the four local model artifacts are generated; they are intentionally excluded from Git.
 
 ## 9. References
 
