@@ -1,0 +1,21 @@
+
+# Private datasets
+*.csv
+data/
+datasets/
+
+# Local model artifacts
+models/*.json
+models/*.pkl
+models/*.pt
+models/*.pth
+
+# Secrets
+.env
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
