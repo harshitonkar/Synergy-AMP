@@ -1,21 +1,16 @@
+# data (rebuild with the scripts; check DBAASP terms before sharing)
+raw/
+peptides.csv
+synergy_clean.csv
+antibiotic_smiles.csv
 
-# Private datasets
-*.csv
-data/
-datasets/
-
-# Local model artifacts
-models/*.json
-models/*.pkl
-models/*.pt
-models/*.pth
-
-# Secrets
-.env
-.streamlit/secrets.toml
-
-# Python
 __pycache__/
 *.pyc
-.venv/
-venv/
+.ipynb_checkpoints/
+*.zip
+.DS_Store
+
+# demo data files (generated from the dataset; not redistributed)
+demo/baseline_xgb.json
+demo/baseline_meta.json
+demo/known_combinations.csv

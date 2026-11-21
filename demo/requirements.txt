@@ -1,0 +1,5 @@
+gradio
+xgboost==3.2.0
+scikit-learn
+numpy
+pandas

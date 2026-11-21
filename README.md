@@ -1,5 +1,8 @@
 # Synergy-AMP
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/harshitonkar/Synergy-AMP/blob/main/notebooks/synergy_amp_benchmark.ipynb)
+[![Live demo](https://img.shields.io/badge/demo-Hugging%20Face%20Space-blue)](https://harshitonkar-synergy-amp-baselin.hf.space/)
+
 **A leakage-controlled benchmark: do peptide sequence features improve prediction of antimicrobial-peptide (AMP) + antibiotic synergy?**
 
 > **Main finding.** Under validation that withholds similar peptides, whole antibiotics, or whole studies from training, a model that knows only
@@ -132,15 +135,26 @@ python scripts/02_clean_dataset.py         # synergy_clean.csv and antibiotic_sm
 Later DBAASP releases may change record counts slightly; small numeric differences are expected (two runs of the same code on different library builds differed by at most 0.01 in any reported metric).
 The reported run used Python 3.13.16, numpy 2.4.6, pandas 2.2.3, scikit-learn 1.6.1, scipy 1.16.3, xgboost 3.4.1, rdkit 2026.09.2, biopython 1.88, shap 0.54.1, torch 2.14.1 and transformers 5.22.1 (recorded in the notebook's last section).
 
-## 8. Repository layout
+## 8. Live demo
+
+A small web demo of the **context-only baseline** (antibiotic + bacterium) is hosted on Hugging Face Spaces: https://harshitonkar-synergy-amp-baselin.hf.space/
+
+* Choose an antibiotic and a bacterial species. The page shows how many published experiments exist for that pair, the observed synergy rate, and the baseline model's estimate.
+* **Peptide sequence is deliberately not an input**: peptide features did not improve prediction in this study (Section 4).
+* For pairs with no published data the page shows only a qualitative leaning, because the baseline's validated AUROC is 0.643 and extrapolated probabilities would overstate its confidence.
+* Only aggregated counts and rates are shown, not peptide-level records. It is a research demonstration, not a tool for clinical or laboratory decisions.
+* Code is in `demo/`. The three data files the demo needs are generated from the curated dataset with `demo/export_for_space.py` (a Colab cell; no GPU needed) and are not committed.
+
+## 9. Repository layout
 
 ```
 scripts/     01_download_dbaasp.py   02_clean_dataset.py
 notebooks/   synergy_amp_benchmark.ipynb
-README.md    requirements.txt    .gitignore
+demo/        app.py   requirements.txt   export_for_space.py   README.md
+README.md    LICENSE    requirements.txt    .gitignore
 ```
 
-## 9. References
+## 10. References
 
 * Pirtskhalava M, Amstrong AA, Grigolava M, Chubinidze M, Alimbarashvili E, Vishnepolsky B, Gabrielian A, Rosenthal A, Hurt DE, Tartakovsky M.
   DBAASP v3: database of antimicrobial/cytotoxic activity and structure of peptides as a resource for development of new therapeutics.
@@ -150,8 +164,6 @@ README.md    requirements.txt    .gitignore
 * Lundberg SM, Lee S-I. A unified approach to interpreting model predictions. *NeurIPS* 2017 (SHAP).
 * RDKit, PubChem (structure lookup), Biopython, scikit-learn, SciPy.
 
-## 10. Author and license
+## 11. Author and license
 
-Author: Harshit Narayan Onkar
-Code License : This project is licensed under the [MIT License](LICENSE).
-Data remain subject to the DBAASP terms of use.
+Author: Harshit Narayan Onkar. Code license: MIT (see `LICENSE`). Data remain subject to the DBAASP terms of use.
